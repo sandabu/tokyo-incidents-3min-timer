@@ -3,33 +3,39 @@ import ddf.minim.*;  //<>//
 Minim minim; 
 AudioPlayer player;
 
+//PVの初期時刻
 int[] sideH = {10, 15, 21, 23};
-int sideM;
-int sideS;
-int sideMS;
-
 int m = 59 - 56;
 int s = 59 - 53;
 int ms = 0;
 
+//サイドカウンタの初期化
+int sideM;
+int sideS;
+int sideMS;
+
+//ミリ秒の初期化
 int countDownMillis;
 int tmpMillis;
 
+//フォントの初期化
 PFont segmentFont;
 PFont segmentSmallFont;
+
+//シーンの初期化
 int scene = 0;
+boolean willStop = false;
+
+//イメージの初期化
 PImage logo;
 PImage charLogo;
 
+//配置の初期化
 float firstPosition;
 float secondPosition;
 float thirdPosition;
 float fourthPosition;
 float center;
-
-boolean willStop = false;
-
-ArrayList scripts = new ArrayList();
 
 void setup() {
   //Frame Settings
@@ -39,6 +45,7 @@ void setup() {
 
   //Player Settings
   minim = new Minim(this);
+  //Set Back Sound
   player = minim.loadFile("noudou-master.mp3");
 
   //Position Settings
@@ -86,7 +93,6 @@ void draw() {
       scene = 3;
       tmpMillis = millis();
     } else {
-      //renderCaption();
       countDownWatch();
     }
     renderCountDownWatch();
@@ -181,13 +187,6 @@ void renderSideTimer(int i){
     rotate(ratio);
     text (sideH[i] + " : " +  nf(sideM, 2) + " : " + nf(sideS, 2) + " : " +nf(sideMS, 2), - char_w / 2, - char_h / 2, char_w, char_h);
     popMatrix();
-}
-
-void renderCaption(String right, String left){
-  textFont(cinecapFont, 42);
-  fill(255, 255, 255);
-  text (right, width - 150, height / 10, 50, height * 9 / 10);
-  text (left,  width - 200, height / 5,  50, height * 9 / 10);
 }
 
 void renderEnding() {
